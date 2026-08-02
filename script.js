@@ -20,157 +20,122 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-/*
- * PULSANTE SEGRETO ATTIVATO DAL LOGO
- */
+  /*
+   * PULSANTE SEGRETO ATTIVATO DAL LOGO
+   */
 
-/*
- * PULSANTE SEGRETO ATTIVATO DAL LOGO
- */
+  const secretSection = document.getElementById("secretSection");
 
-/*
- * PULSANTE SEGRETO ATTIVATO DAL LOGO
- */
+  if (logoButton && secretButton) {
+    logoButton.addEventListener("click", () => {
+      /*
+       * Mostra subito il messaggio.
+       */
+      alert(
+        "Hai bypassato il protocollo di sorveglianza " +
+        "della Discratocrazia.\n\n" +
+        "L'archivio clandestino è stato declassificato " +
+        "per questa sessione."
+      );
 
-const secretSection =
-  document.getElementById("secretSection");
+      /*
+       * Fa comparire definitivamente il pulsante 5.
+       */
+      secretButton.classList.add("visible");
+      secretButton.setAttribute("aria-hidden", "false");
 
-if (logoButton && secretButton) {
-  logoButton.addEventListener("click", () => {
+      /*
+       * Forza il browser ad aggiornare la pagina.
+       */
+      void secretButton.offsetHeight;
 
-    /*
-     * Mostra subito il messaggio.
-     */
+      /*
+       * Porta la pagina esattamente al pulsante 5.
+       */
+      setTimeout(() => {
+        const position =
+          secretButton.getBoundingClientRect().top +
+          window.scrollY -
+          30;
 
-    alert(
-      "Hai bypassato il protocollo di sorveglianza " +
-      "della Discratocrazia.\n\n" +
-      "L'archivio clandestino è stato declassificato " +
-      "per questa sessione."
-    );
+        window.scrollTo({
+          top: position,
+          behavior: "smooth"
+        });
+      }, 50);
+    });
+  }
 
+  /*
+   * CONVERTITORE DEFINITIVO DEL MESE EGNORIANO
+   */
 
-    /*
-     * Fa comparire definitivamente il pulsante 5.
-     */
+  const convertEgnoraDate = document.getElementById("convertEgnoraDate");
+  const birthDay = document.getElementById("birthDay");
+  const birthMonth = document.getElementById("birthMonth");
+  const egnoraResult = document.getElementById("egnoraResult");
+  const egnoraDateText = document.getElementById("egnoraDateText");
 
-    secretButton.classList.add("visible");
-    secretButton.setAttribute("aria-hidden", "false");
+  // Descrizioni personalizzate per ciascuno dei 15 mesi egnoriani
+  const descrizioniMesiEgnora = {
+    1: "Mese 1: Il Risveglio dell'Ombra — Rappresenta gli albori del pensiero egnoriano e la prima scintilla della coscienza.",
+    2: "Mese 2: La Crepa della Memoria — Il periodo in cui le vecchie certezze terrestri iniziano a sgretolarsi.",
+    3: "Mese 3: Il Silenzio Primordiale — Dedicato alla meditazione profonda e all'ascolto dell'invisibile.",
+    4: "Mese 4: La Trascrizione — La fase in cui i primi codici della Discratocrazia vennero messi per iscritto.",
+    5: "Mese 5: Il Velo Svelato — Il momento della percezione delle verità nascoste oltre la superficie.",
+    6: "Mese 6: L'Equilibrio Distorto — Rappresenta la dualità tra l'ordine imposto e il caos naturale.",
+    7: "Mese 7: La Custodia dell'Eternità — Il tempo dedicato alla conservazione dei segreti dimenticati.",
+    8: "Mese 8: Il Punto di Svolta — Simboleggia il passaggio definitivo dalla vecchia alla nuova era.",
+    9: "Mese 9: La Riflessione del Telar — Il mese in cui la trama dell'universo si fa più fitta e leggibile.",
+    10: "Mese 10: La Purificazione dei Codici — Fase di rimozione di ogni interferenza terrestre dal pensiero.",
+    11: "Mese 11: Il Sospetto Incombente — L'inizio della vigilanza attiva e della sorveglianza eterea.",
+    12: "Mese 12: L'Archivio Clandestino — Mese in cui la conoscenza protetta viene resa accessibile ai soli eletti.",
+    13: "Mese 13: Il Convergere degli Eventi — I destini individuali si allineano alla grande struttura di Egnora.",
+    14: "Mese 14: La Penombra Finale — L'attesa composta prima della grande rivelazione ciclica.",
+    15: "Mese 15: Il Compimento — La chiusura del ciclo egnoriano e la preparazione al nuovo inizio."
+  };
 
+  // Giorni accumulati all'inizio di ogni mese (anno standard)
+  const giorniCumulatiMesi = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+  const giorniNeiMesi = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-    /*
-     * Forza il browser ad aggiornare la pagina
-     * dopo la comparsa del pulsante.
-     */
+  if (convertEgnoraDate && birthDay && birthMonth && egnoraResult && egnoraDateText) {
+    convertEgnoraDate.addEventListener("click", () => {
+      const day = Number(birthDay.value);
+      const month = Number(birthMonth.value);
 
-    void secretButton.offsetHeight;
+      if (!day || !month) {
+        alert("Inserisci sia il giorno che il mese di nascita.");
+        return;
+      }
 
+      if (month < 1 || month > 12) {
+        alert("Inserisci un mese valido (da 1 a 12).");
+        return;
+      }
 
-    /*
-     * Porta la pagina esattamente al pulsante 5.
-     */
+      const maxGiorni = giorniNeiMesi[month - 1];
+      if (day < 1 || day > maxGiorni) {
+        alert(`Inserisci un giorno valido per il mese selezionato (max ${maxGiorni}).`);
+        return;
+      }
 
-    setTimeout(() => {
-      const position =
-        secretButton.getBoundingClientRect().top +
-        window.scrollY -
-        30;
+      // 1. Calcolo del valore n (giorni trascorsi)
+      const n = giorniCumulatiMesi[month - 1] + day;
 
-      window.scrollTo({
-        top: position,
-        behavior: "smooth"
-      });
-    }, 50);
-  });
-}
+      // 2. Calcolo del mese egnoriano (da 1 a 15, arrotondato per eccesso)
+      const meseEgnoriano = Math.ceil((n * 15) / 365);
 
+      // 3. Recupero della descrizione corrispondente
+      const descrizione = descrizioniMesiEgnora[meseEgnoriano];
 
-/*
- * CONVERTITORE PROVVISORIO DELLA DATA EGNORIANA
- */
+      // 4. Stampa del risultato
+      egnoraDateText.innerHTML = `
+        <strong>Appartieni al ${meseEgnoriano}° Mese Egnoriano!</strong><br><br>
+        <em>${descrizione}</em>
+      `;
 
-const convertEgnoraDate =
-  document.getElementById("convertEgnoraDate");
-
-const birthDay =
-  document.getElementById("birthDay");
-
-const birthMonth =
-  document.getElementById("birthMonth");
-
-const birthYear =
-  document.getElementById("birthYear");
-
-const egnoraResult =
-  document.getElementById("egnoraResult");
-
-const egnoraDateText =
-  document.getElementById("egnoraDateText");
-
-
-if (
-  convertEgnoraDate &&
-  birthDay &&
-  birthMonth &&
-  birthYear &&
-  egnoraResult &&
-  egnoraDateText
-) {
-  convertEgnoraDate.addEventListener("click", () => {
-    const day = Number(birthDay.value);
-    const month = Number(birthMonth.value);
-    const year = Number(birthYear.value);
-
-    if (!day || !month || !year) {
-      alert("Inserisci giorno, mese e anno.");
-      return;
-    }
-
-    if (
-      day < 1 ||
-      day > 31 ||
-      month < 1 ||
-      month > 12 ||
-      year < 1900 ||
-      year > 2100
-    ) {
-      alert("Inserisci una data valida.");
-      return;
-    }
-
-    /*
-     * Conversione provvisoria.
-     *
-     * Un anno egnoriano possiede:
-     * 15 mesi × 30 giorni = 450 giorni.
-     *
-     * Per realizzare la conversione reale bisogna stabilire:
-     *
-     * 1. quale data terrestre corrisponde al giorno 1,
-     *    mese 1, anno 1 di Egnora;
-     *
-     * 2. quanto dura esattamente un giorno egnoriano
-     *    rispetto a un giorno terrestre;
-     *
-     * 3. i nomi dei 15 mesi e dei 9 giorni
-     *    della settimana.
-     */
-
-    const provisionalDay =
-      ((day - 1) % 30) + 1;
-
-    const provisionalMonth =
-      ((month - 1) % 15) + 1;
-
-    const provisionalYear =
-      year + 742;
-
-    egnoraDateText.textContent =
-      `${provisionalDay}° giorno del ` +
-      `${provisionalMonth}° mese, ` +
-      `anno ${provisionalYear} di Egnora`;
-
-    egnoraResult.hidden = false;
-  });
-}
+      egnoraResult.hidden = false;
+    });
+  }
 });
