@@ -336,40 +336,39 @@ body {
   }
 }
 
-
 /* Stile per i pulsanti Social (TikTok e Instagram) */
 
 .social-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px; /* Spazio tra i pulsanti */
-  margin-top: 30px;
-  flex-wrap: wrap;
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 30px !important; /* <--- Forza lo spazio di 30px tra i due link */
+  margin-top: 25px !important;
+  margin-bottom: 15px !important;
 }
 
-.social-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 26px;
-  border: 1px solid #4a4a4a;
-  border-radius: 6px;
-  background-color: #191919;
+a.social-button,
+.social-buttons a {
+  display: inline-block !important;
+  padding: 10px 22px !important;
+  border: 1px solid #4a4a4a !important;
+  border-radius: 6px !important;
+  background-color: #1c1c1c !important;
   color: #ffffff !important;
   text-decoration: none !important;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  transition: all 0.25s ease;
+  font-family: Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  transition: all 0.25s ease !important;
 }
 
-.social-button:hover {
-  border-color: #9e1b1b;
-  background-color: #241414;
-  transform: translateY(-2px);
+a.social-button:hover,
+.social-buttons a:hover {
+  border-color: #9e1b1b !important;
+  background-color: #281313 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
 }
-
 
 /* Versione per telefoni e schermi piccoli */
 
