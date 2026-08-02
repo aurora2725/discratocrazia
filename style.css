@@ -390,4 +390,34 @@ body {
     line-height: 1.6;
   }
 }
+/* Stile per i pulsanti Social (TikTok e Instagram) */
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* <--- Questo crea la distanza di 20px tra i due pulsanti */
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.social-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  background-color: #191919;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+  transition: all 0.25s ease;
+}
+
+.social-button:hover {
+  border-color: #9e1b1b;
+  background-color: #241414;
+  transform: translateY(-2px);
+}
 }
