@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const secretButton = document.getElementById("secretButton");
   const accordionButtons = document.querySelectorAll(".accordion-button");
 
+  // Gestione apertura/chiusura degli accordion
   accordionButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const panelId = button.getAttribute("aria-controls");
@@ -14,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const isOpen = button.getAttribute("aria-expanded") === "true";
-
       button.setAttribute("aria-expanded", String(!isOpen));
       panel.hidden = isOpen;
     });
@@ -23,14 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   /*
    * PULSANTE SEGRETO ATTIVATO DAL LOGO
    */
-
-  const secretSection = document.getElementById("secretSection");
-
   if (logoButton && secretButton) {
     logoButton.addEventListener("click", () => {
-      /*
-       * Mostra subito il messaggio.
-       */
       alert(
         "Hai bypassato il protocollo di sorveglianza " +
         "della Discratocrazia.\n\n" +
@@ -38,20 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "per questa sessione."
       );
 
-      /*
-       * Fa comparire definitivamente il pulsante 5.
-       */
       secretButton.classList.add("visible");
       secretButton.setAttribute("aria-hidden", "false");
-
-      /*
-       * Forza il browser ad aggiornare la pagina.
-       */
       void secretButton.offsetHeight;
 
-      /*
-       * Porta la pagina esattamente al pulsante 5.
-       */
       setTimeout(() => {
         const position =
           secretButton.getBoundingClientRect().top +
@@ -69,14 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
   /*
    * CONVERTITORE DEFINITIVO DEL MESE EGNORIANO
    */
-
   const convertEgnoraDate = document.getElementById("convertEgnoraDate");
   const birthDay = document.getElementById("birthDay");
   const birthMonth = document.getElementById("birthMonth");
   const egnoraResult = document.getElementById("egnoraResult");
   const egnoraDateText = document.getElementById("egnoraDateText");
 
-  // Descrizioni personalizzate per ciascuno dei 15 mesi egnoriani
+  // Descrizioni dei 15 mesi egnoriani
   const descrizioniMesiEgnora = {
     1: "Mese 1: Il Risveglio dell'Ombra — Rappresenta gli albori del pensiero egnoriano e la prima scintilla della coscienza.",
     2: "Mese 2: La Crepa della Memoria — Il periodo in cui le vecchie certezze terrestri iniziano a sgretolarsi.",
@@ -95,14 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
     15: "Mese 15: Il Compimento — La chiusura del ciclo egnoriano e la preparazione al nuovo inizio."
   };
 
-  // Giorni accumulati all'inizio di ogni mese (anno standard)
   const giorniCumulatiMesi = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
   const giorniNeiMesi = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-  if (convertEgnoraDate && birthDay && birthMonth && egnoraResult && egnoraDateText) {
+  if (convertEgnoraDate) {
     convertEgnoraDate.addEventListener("click", () => {
-      const day = Number(birthDay.value);
-      const month = Number(birthMonth.value);
+      const day = Number(birthDay ? birthDay.value : 0);
+      const month = Number(birthMonth ? birthMonth.value : 0);
 
       if (!day || !month) {
         alert("Inserisci sia il giorno che il mese di nascita.");
@@ -120,22 +102,24 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // 1. Calcolo del valore n (giorni trascorsi)
+      // Calcolo giorni trascorsi dall'inizio dell'anno (n)
       const n = giorniCumulatiMesi[month - 1] + day;
 
-      // 2. Calcolo del mese egnoriano (da 1 a 15, arrotondato per eccesso)
+      // Calcolo mese egnoriano (da 1 a 15, arrotondato per eccesso)
       const meseEgnoriano = Math.ceil((n * 15) / 365);
-
-      // 3. Recupero della descrizione corrispondente
       const descrizione = descrizioniMesiEgnora[meseEgnoriano];
 
-      // 4. Stampa del risultato
-      egnoraDateText.innerHTML = `
-        <strong>Appartieni al ${meseEgnoriano}° Mese Egnoriano!</strong><br><br>
-        <em>${descrizione}</em>
-      `;
+      if (egnoraDateText) {
+        egnoraDateText.innerHTML = `
+          <strong>Appartieni al ${meseEgnoriano}° Mese Egnoriano!</strong><br><br>
+          <em>${descrizione}</em>
+        `;
+      }
 
-      egnoraResult.hidden = false;
+      if (egnoraResult) {
+        egnoraResult.hidden = false;
+        egnoraResult.removeAttribute("hidden");
+      }
     });
   }
 });
